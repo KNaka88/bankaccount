@@ -69,11 +69,13 @@ $(function(){
     if (choice === "Deposit"){
       newBankAccount.deposit(amount);
       $("#transactions").append("<li>Deposited: $" + amount.toFixed(2) + "</li>");
-    } else if (choice === "Withdrawal") {
+    } else if (choice === "Withdrawal" && newBankAccount.balance >= amount) {
       newBankAccount.withdrawal(amount);
       $("#transactions").append("<li>Withdrew: $" + amount.toFixed(2) + "</li>");
     } else {
-      alert("error!");
+      alert("You cannot withdraw more money than you have!!!!");
+      $("#transactions").append("<li>Penalty: -$5.00 for wasting our time.</li>");
+      newBankAccount.withdrawal(5);
     }
     $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
     event.preventDefault();
