@@ -29,6 +29,7 @@ $(function(){
     newBankAccount = new BankAccount(fullName, email, password);
 
     $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
+    $(".person-name").text(newBankAccount.fullName);
 
     setTimeout(function(){
       $("#signup-form").hide();
@@ -67,14 +68,20 @@ $(function(){
     var amount = parseInt($("#amount").val());
     if (choice === "Deposit"){
       newBankAccount.deposit(amount);
+      $("#transactions").append("<li>Deposited: $" + amount.toFixed(2) + "</li>");
     } else if (choice === "Withdrawal") {
       newBankAccount.withdrawal(amount);
+      $("#transactions").append("<li>Withdrew: $" + amount.toFixed(2) + "</li>");
     } else {
       alert("error!");
     }
     $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
     event.preventDefault();
 
+  });
+
+  $("#activity-button").click(function(){
+    $("#activity").toggle();
   });
 
 
