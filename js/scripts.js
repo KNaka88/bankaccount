@@ -19,6 +19,7 @@ BankAccount.prototype.withdrawal = function(amount){
 
 $(function(){
   var newBankAccount;
+  var loginTry = 0;
 
   $("form#signup-form").submit(function(event){
     var fullName = $("#full-name").val();
@@ -39,9 +40,14 @@ $(function(){
 
   });
   $("form#signin-form").submit(function(event){
+    $("#signin-form h4").remove();
     var signinEmail = $("#signin-email").val();
     var signinPassword = $("#signin-password").val();
-    if(signinEmail === newBankAccount.email && signinPassword === newBankAccount.password){
+
+    if(loginTry >= 3){
+      alert("You entered wrong password too many times!")
+      $("#sign-in").hide();
+    }else if(signinEmail === newBankAccount.email && signinPassword === newBankAccount.password){
       setTimeout(function(){
         $("#sign-in").hide();
         $("#account").show();
@@ -49,6 +55,7 @@ $(function(){
 
     } else {
       $("#signin-form").append("<h4>Your username and password do not match</h4>");
+      loginTry++;
     }
     event.preventDefault();
   });
