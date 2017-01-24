@@ -18,33 +18,43 @@ BankAccount.prototype.withdrawal = function(amount){
 
 
 $(function(){
+  var newBankAccount;
+
   $("form#signup-form").submit(function(event){
     var fullName = $("#full-name").val();
     var email = $("#signup-email").val();
     var password = $("#signup-password").val();
 
-    var newBankAccount = new BankAccount(fullName, email, password);
-    console.log(newBankAccount);
+    newBankAccount = new BankAccount(fullName, email, password);
+
+    setTimeout(function(){
+      $("#signup-form").hide();
+      $("#signup-complete").show();
+    }, 1000);
 
 
     event.preventDefault();
+
   });
-});
-
-
-$(function(){
   $("form#signin-form").submit(function(event){
+    var signinEmail = $("#signin-email").val();
+    var signinPassword = $("#signin-password").val();
+    if(signinEmail === newBankAccount.email && signinPassword === newBankAccount.password){
+      setTimeout(function(){
+        $("#sign-in").hide();
+        $("#account").show();
+      }, 1000);
 
-
+    }
     event.preventDefault();
   });
-});
 
 
-$(function(){
+
   $("form#action-form").submit(function(event){
 
-
     event.preventDefault();
   });
+
+
 });
