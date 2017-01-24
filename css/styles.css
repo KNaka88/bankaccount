@@ -1,0 +1,7 @@
+button {
+  margin-top: 5px;
+}
+
+#activity, #account {
+  display: none;
+}
