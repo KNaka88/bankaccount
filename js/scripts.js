@@ -8,11 +8,11 @@ function BankAccount (fullName, email, password){
 }
 
 BankAccount.prototype.deposit = function(amount){
-    balance += amount;
+    this.balance += amount;
 };
 
 BankAccount.prototype.withdrawal = function(amount){
-    balance -= amount;
+    this.balance -= amount;
 };
 
 
@@ -26,6 +26,8 @@ $(function(){
     var password = $("#signup-password").val();
 
     newBankAccount = new BankAccount(fullName, email, password);
+
+    $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
 
     setTimeout(function(){
       $("#signup-form").hide();
@@ -54,8 +56,18 @@ $(function(){
 
 
   $("form#action-form").submit(function(event){
-
+    var choice = $("#action-type").val();
+    var amount = parseInt($("#amount").val());
+    if (choice === "Deposit"){
+      newBankAccount.deposit(amount);
+    } else if (choice === "Withdrawal") {
+      newBankAccount.withdrawal(amount);
+    } else {
+      alert("error!");
+    }
+    $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
     event.preventDefault();
+
   });
 
 
