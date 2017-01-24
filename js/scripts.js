@@ -45,6 +45,8 @@ $(function(){
         $("#account").show();
       }, 1000);
 
+    } else {
+      $("#signin-form").append("<h4>Your username and password do not match</h4>");
     }
     event.preventDefault();
   });
