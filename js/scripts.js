@@ -65,7 +65,7 @@ $(function(){
 
   $("form#action-form").submit(function(event){
     var choice = $("#action-type").val();
-    var amount = parseInt($("#amount").val());
+    var amount = parseFloat($("#amount").val());
     if (choice === "Deposit"){
       newBankAccount.deposit(amount);
       $("#transactions").append("<li>Deposited: $" + amount.toFixed(2) + "</li>");
@@ -77,7 +77,7 @@ $(function(){
       $("#transactions").append("<li>Penalty: -$5.00 for wasting our time.</li>");
       newBankAccount.withdrawal(5);
     }
-    $(".show-balance").text("$" + newBankAccount.balance.toFixed(2));
+    $(".show-balance").text("$" + newBankAccount.balance.toLocaleString(undefined, {minimumFractionDigits: 2}));
     event.preventDefault();
 
   });
